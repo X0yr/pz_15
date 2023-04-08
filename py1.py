@@ -1,4 +1,6 @@
 import sqlite3 as sq
+from info import tovars_info
+from info import zayav_info
 
 
 with sq.connect('Opt. base') as tov:
@@ -9,7 +11,8 @@ with sq.connect('Opt. base') as tov:
         opis VARCHAR,
         ed_ismer VARCHAR
     )""")
-    #tov.execute("INSERT INTO goods VALUES (2, 'Древесина', 'Сырьё', 'единиц')")
+    #ars.execute("INSERT INTO goods VALUES (9, 'Мука', 'Прордукты', 'Грамм')")
+
 
 
 
@@ -21,7 +24,7 @@ with sq.connect('Opt. base') as mag:
         address VARCHAR,
         phone_number VARCHAR
     )""")
-    mag.execute("INSERT INTO goods VALUES (11, 'Летуаль', 'ул. Ленина', '+7 999 999 99 99')")
+    #mag.execute("INSERT INTO shop VALUES (20, 'Пятёрочка', 'ул. Крышкина', '+7 999 103 56 34')")
 
 with sq.connect('Opt. base') as zayav:
     magaz = zayav.cursor()
@@ -31,7 +34,7 @@ with sq.connect('Opt. base') as zayav:
         id_mag INTEGER,
         FOREIGN KEY (id_mag)  REFERENCES shop (id_mag)
     )""")
-    zayav.execute("INSERT INTO goods VALUES (21, '2005.22.10', '11')")
+    #zayav.execute("INSERT INTO store_statements VALUES (40, '2023.1.29', 17)")
 
 
 with sq.connect('Opt. base') as kol:
@@ -42,7 +45,7 @@ with sq.connect('Opt. base') as kol:
         id_tov INTEGER,
         FOREIGN KEY (id_tov)  REFERENCES goods (id_tov)
     )""")
-    kol.execute("INSERT INTO goods VALUES (31, 3060, 1)")
+    #kol.execute("INSERT INTO number_of_goods_in_stock VALUES (30, 600, 10)")
 
 with sq.connect('Opt. base') as coc:
     tav = coc.cursor()
@@ -54,4 +57,4 @@ with sq.connect('Opt. base') as coc:
         FOREIGN KEY (id_zayav)  REFERENCES store_statements (id_zayav),
         FOREIGN KEY (id_tov)  REFERENCES goods (id_tov)
     )""")
-    coc.execute("INSERT INTO goods VALUES (41, 'Древесина', 'Сырьё', 'единиц')")
+    coc.execute("INSERT INTO compound VALUES (41, 40, 33, 7)")
