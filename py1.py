@@ -1,3 +1,6 @@
+#От таблицы Состав отказались, согласованно с преподавателем
+
+
 import sqlite3 as sq
 from info import tovars_info
 from info import zayav_info
@@ -12,8 +15,7 @@ with sq.connect('Opt. base') as tov:
         ed_ismer VARCHAR
     )""")
     #ars.execute("INSERT INTO goods VALUES (9, 'Мука', 'Прордукты', 'Грамм')")
-
-
+    
 
 
 with sq.connect('Opt. base') as mag:
@@ -35,6 +37,7 @@ with sq.connect('Opt. base') as zayav:
         FOREIGN KEY (id_mag)  REFERENCES shop (id_mag)
     )""")
     #zayav.execute("INSERT INTO store_statements VALUES (40, '2023.1.29', 17)")
+    zayav.execute("UPDATE store_statements SET date_zayav = '2022-1-29' WHERE id_zayav = 40")
 
 
 with sq.connect('Opt. base') as kol:
@@ -47,14 +50,18 @@ with sq.connect('Opt. base') as kol:
     )""")
     #kol.execute("INSERT INTO number_of_goods_in_stock VALUES (30, 600, 10)")
 
-with sq.connect('Opt. base') as coc:
-    tav = coc.cursor()
-    tav.execute("""CREATE TABLE IF NOT EXISTS compound (
-        id_coc INTEGER PRIMARY KEY,
-        kol_vo INTEGER,
-        id_zayav INTEGER,
-        id_tov INTEGER,
-        FOREIGN KEY (id_zayav)  REFERENCES store_statements (id_zayav),
-        FOREIGN KEY (id_tov)  REFERENCES goods (id_tov)
-    )""")
-    coc.execute("INSERT INTO compound VALUES (41, 40, 33, 7)")
+
+
+#1 ars.execute("SELECT name_tov, opis FROM goods")
+#2 ars.execute("SELECT nazv_mag, address FROM shop")
+#3 ars.execute("SELECT id_zayav, date_zayav FROM store_statements")
+#4 ars.execute("SELECT id_tov, kol_vo FROM number_of_goods_in_stock")
+#5 ars.execute("SELECT id_tov, kol_vo FROM number_of_goods_in_stock ORDER BY kol_vo DESC")
+#6 ars.execute("SELECT id_zayav, id_tov FROM compound")
+#7 ars.execute("SELECT * FROM number_of_goods_in_stock WHERE kol_vo < 5000")
+#8 ars.execute("SELECT * FROM store_statements WHERE (date_zayav BETWEEN '2022.8.15' AND '2022.11.30')")
+#9 -
+
+
+resolt = ars.fetchall()
+print(resolt)
